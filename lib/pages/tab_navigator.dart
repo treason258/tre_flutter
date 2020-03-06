@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/generated/i18n.dart';
+import 'package:tre_flutter/pages/test_page.dart';
 
 import 'home_page.dart';
 import 'user_page.dart';
 
-List<Widget> pages = <Widget>[HomePage(), UserPage()];
+List<Widget> pages = <Widget>[HomePage(), UserPage(), TestPage()];
 
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
@@ -51,8 +52,12 @@ class _TabNavigatorState extends State<TabNavigator> {
             title: Text(S.of(context).tabHome),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_emoticon),
+            icon: Icon(Icons.person),
             title: Text(S.of(context).tabUser),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.error),
+            title: Text("TEST"),
           ),
         ],
         currentIndex: _selectedIndex,

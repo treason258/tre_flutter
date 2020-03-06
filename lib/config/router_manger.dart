@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tre_flutter/pages/first_page.dart';
+import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/pages/splash_page.dart';
 import 'package:tre_flutter/pages/tab_navigator.dart';
 import 'package:tre_flutter/widgets/page_route_anim.dart';
 
 class RouteName {
-  static const String first = 'first';
+  static const String test = 'test';
   static const String splash = 'splash';
   static const String tab = '/';
 //  static const String homeSecondFloor = 'homeSecondFloor';
@@ -23,8 +23,8 @@ class RouteName {
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteName.first:
-        return NoAnimRouteBuilder(FirstPage());
+      case RouteName.test:
+        return NoAnimRouteBuilder(TestPage());
       case RouteName.splash:
         return NoAnimRouteBuilder(SplashPage());
       case RouteName.tab:
