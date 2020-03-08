@@ -7,12 +7,12 @@ import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
-class HomePage extends StatefulWidget {
+class ArticlePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _ArticlePageState createState() => _ArticlePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ArticlePageState extends State<ArticlePage> {
   List<ArticleModel> dataSource = [];
 
   @override
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('首页'),
+        title: Text('文章列表'),
       ),
       body: ListView.builder(
         itemCount: dataSource.length,

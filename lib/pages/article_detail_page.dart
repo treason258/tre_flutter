@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class UserPage extends StatefulWidget {
+class ArticleDetailPage extends StatefulWidget {
   @override
-  _UserPageState createState() => _UserPageState();
+  _ArticleDetailPageState createState() => _ArticleDetailPageState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _ArticleDetailPageState extends State<ArticleDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('我的'),
+        title: Text('详情'),
       ),
       body: Container(
         width: double.infinity,
@@ -18,7 +18,7 @@ class _UserPageState extends State<UserPage> {
         alignment: Alignment.center,
         color: Colors.white,
         child: Text(
-          'Welcome To UserPage',
+          'Welcome To ArticleDetailPage',
           style: TextStyle(
             color: Colors.black,
             fontSize: 25,

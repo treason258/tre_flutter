@@ -1,68 +1,54 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tre_flutter/pages/test_page.dart';
+import 'package:flutter/material.dart';
+import 'package:tre_flutter/pages/article_detail_page.dart';
 import 'package:tre_flutter/pages/splash_page.dart';
 import 'package:tre_flutter/pages/tab_navigator.dart';
+import 'package:tre_flutter/pages/test/test_page_1.dart';
+import 'package:tre_flutter/pages/test/test_page_2.dart';
+import 'package:tre_flutter/pages/test/test_page_3.dart';
+import 'package:tre_flutter/pages/test/test_page_4.dart';
+import 'package:tre_flutter/pages/test/test_page_5.dart';
+import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/widgets/page_route_anim.dart';
 
 class RouteName {
-  static const String test = 'test';
+  // TEST
+  static const String test0 = 'test0';
+  static const String test1 = 'test1';
+  static const String test2 = 'test2';
+  static const String test3 = 'test3';
+  static const String test4 = 'test4';
+  static const String test5 = 'test5';
+
+  // RouteName
   static const String splash = 'splash';
   static const String tab = '/';
-//  static const String homeSecondFloor = 'homeSecondFloor';
-//  static const String login = 'login';
-//  static const String register = 'register';
-//  static const String articleDetail = 'articleDetail';
-//  static const String structureList = 'structureList';
-//  static const String favouriteList = 'favouriteList';
-//  static const String setting = 'setting';
-//  static const String coinRecordList = 'coinRecordList';
-//  static const String coinRankingList = 'coinRankingList';
+  static const String article_detail = 'article_detail';
 }
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RouteName.test:
+      // TEST
+      case RouteName.test0:
         return NoAnimRouteBuilder(TestPage());
+      case RouteName.test1:
+        return NoAnimRouteBuilder(TestPage1());
+      case RouteName.test2:
+        return NoAnimRouteBuilder(TestPage2());
+      case RouteName.test3:
+        return NoAnimRouteBuilder(TestPage3());
+      case RouteName.test4:
+        return NoAnimRouteBuilder(TestPage4());
+      case RouteName.test5:
+        return NoAnimRouteBuilder(TestPage5());
+      // RouteName
       case RouteName.splash:
         return NoAnimRouteBuilder(SplashPage());
       case RouteName.tab:
         return NoAnimRouteBuilder(TabNavigator());
-//      case RouteName.homeSecondFloor:
-//        return SlideTopRouteBuilder(MyBlogPage());
-//      case RouteName.login:
-//        return CupertinoPageRoute(
-//            fullscreenDialog: true, builder: (_) => LoginPage());
-//      case RouteName.register:
-//        return CupertinoPageRoute(builder: (_) => RegisterPage());
-//      case RouteName.articleDetail:
-//        var article = settings.arguments as Article;
-//        return CupertinoPageRoute(builder: (_) {
-//          // 根据配置调用页面
-//          return StorageManager.sharedPreferences.getBool(kUseWebViewPlugin) ??
-//              false
-//              ? ArticleDetailPluginPage(
-//            article: article,
-//          )
-//              : ArticleDetailPage(
-//            article: article,
-//          );
-//        });
-//      case RouteName.structureList:
-//        var list = settings.arguments as List;
-//        Tree tree = list[0] as Tree;
-//        int index = list[1];
-//        return CupertinoPageRoute(
-//            builder: (_) => ArticleCategoryTabPage(tree, index));
-//      case RouteName.favouriteList:
-//        return CupertinoPageRoute(builder: (_) => FavouriteListPage());
-//      case RouteName.setting:
-//        return CupertinoPageRoute(builder: (_) => SettingPage());
-//      case RouteName.coinRecordList:
-//        return CupertinoPageRoute(builder: (_) => CoinRecordListPage());
-//      case RouteName.coinRankingList:
-//        return CupertinoPageRoute(builder: (_) => CoinRankingListPage());
+      case RouteName.article_detail:
+        return NoAnimRouteBuilder(ArticleDetailPage());
       default:
         return CupertinoPageRoute(
             builder: (_) => Scaffold(

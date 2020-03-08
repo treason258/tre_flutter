@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/generated/i18n.dart';
+import 'package:tre_flutter/pages/home_page.dart';
 import 'package:tre_flutter/pages/test_page.dart';
-
-import 'home_page.dart';
-import 'user_page.dart';
+import 'package:tre_flutter/pages/user_page.dart';
 
 List<Widget> pages = <Widget>[HomePage(), UserPage(), TestPage()];
 
