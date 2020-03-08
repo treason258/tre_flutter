@@ -52,7 +52,7 @@ class Router {
       case RouteName.article_detail:
         return NoAnimRouteBuilder(ArticleDetailPage());
       case RouteName.web_view:
-//        var url = settings.arguments as String;
+        // var url = settings.arguments as String;
         var list = settings.arguments as List;
         String title = list[0];
         String url = list[1];

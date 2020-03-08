@@ -6,37 +6,61 @@ import 'package:webview_flutter/webview_flutter.dart';
 class WebViewPage extends StatefulWidget {
   String title;
   String url;
-  WebViewController _webViewController; // 添加一个controller
 
-  WebViewPage({this.title, this.url});
+  WebViewPage({this.title, this.url}) {
+    log('WebViewPage | WebViewPage');
+  }
+
+  @override
+  StatefulElement createElement() {
+    log('WebViewPage | createElement');
+    return super.createElement();
+  }
 
   @override
   _WebViewPageState createState() {
+    log('WebViewPage | createState');
     return _WebViewPageState();
   }
 }
 
 class _WebViewPageState extends State<WebViewPage> {
   String title;
+  WebViewController webViewController;
 
   @override
   void initState() {
     super.initState();
+    log('_WebViewPageState | initState');
   }
 
-  JavascriptChannel _JsBridge(BuildContext context) => JavascriptChannel(
-      name: 'trejsbridge', // h5调用
-      onMessageReceived: (JavascriptMessage message) async {
-        print(message.message);
-      });
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    log('_WebViewPageState | didChangeDependencies');
+  }
+
+  @override
+  void didUpdateWidget(WebViewPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    log('_WebViewPageState | didUpdateWidget');
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    log('_WebViewPageState | deactivate');
+  }
 
   @override
   void dispose() {
     super.dispose();
+    log('_WebViewPageState | dispose');
   }
 
   @override
   Widget build(BuildContext context) {
+    log('_WebViewPageState | build');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -44,34 +68,54 @@ class _WebViewPageState extends State<WebViewPage> {
       body: SafeArea(
           bottom: false,
           child: WebView(
+            // 需要加载的url
             initialUrl: widget.url,
-            // 加载的url
+            // H5可以通过navigator.userAgent判断当前环境
             userAgent: (Platform.isAndroid ? "Android" : "iOS"),
-            // h5 可以通过navigator.userAgent判断当前环境
+            // 启用JS交互，默认不启用JavascriptMode.disabled
             javascriptMode: JavascriptMode.unrestricted,
-            // 启用 js交互，默认不启用JavascriptMode.disabled
-            javascriptChannels: <JavascriptChannel>[
-              _JsBridge(context) // 与h5 通信
-            ].toSet(),
-            onWebViewCreated: (WebViewController web) {
-              widget._webViewController = web;
-              // webview 创建调用，
-              web.loadUrl(widget.url);
+
+            // WebView创建完成
+            onWebViewCreated: (WebViewController controller) {
+              log('_WebViewPageState | build | WebView | onWebViewCreated');
+              webViewController = controller;
             },
-            navigationDelegate: (NavigationRequest request) {
-              // 在页面跳转之前调用，TODO isForMainFrame为false,页面不跳转.导致网页内很多链接点击没效果
-              return NavigationDecision.navigate; // 跳转;
+
+            // 页面加载开始
+            onPageStarted: (String url) {
+              log('_WebViewPageState | build | WebView | onPageStarted | url = $url');
             },
-            onPageFinished: (String value) {
-              // webview 页面加载调用 flutter 调用h5 端方法
-              widget._webViewController.evaluateJavascript('document.title').then((title) {
-                // 获取网页h5_title并且设置
+
+            // 页面加载完成
+            onPageFinished: (String url) {
+              log('_WebViewPageState | build | WebView | onPageFinished | url = $url');
+              webViewController.evaluateJavascript('document.title').then((title) {
+                // 获取网页H5的title并且更新
                 setState(() {
                   this.title = title;
                 });
               });
             },
+
+            // 拦截请求
+            navigationDelegate: (NavigationRequest request) {
+              log('_WebViewPageState | build | WebView | navigationDelegate | url = ${request.url}');
+              return NavigationDecision.navigate;
+            },
+
+            // 与H5通信
+            javascriptChannels: <JavascriptChannel>[
+              JavascriptChannel(
+                  name: "trejsbridge",
+                  onMessageReceived: (JavascriptMessage message) {
+                    log("_WebViewPageState | build | WebView | javascriptChannels | message = ${message.message}");
+                  }),
+            ].toSet(),
           )),
     );
   }
+}
+
+void log(String msg) {
+  print('matengfei | web_view_page.dart | $msg');
 }
