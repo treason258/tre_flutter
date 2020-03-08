@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
@@ -35,8 +34,7 @@ class _HomePageState extends State<HomePage> {
             item,
             index: index,
             onTap: () async {
-              showToast('onItemClick | index = $index');
-              await Navigator.of(context).pushNamed(RouteName.article_detail);
+              await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
             },
           );
         },

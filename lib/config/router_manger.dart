@@ -9,6 +9,7 @@ import 'package:tre_flutter/pages/test/test_page_3.dart';
 import 'package:tre_flutter/pages/test/test_page_4.dart';
 import 'package:tre_flutter/pages/test/test_page_5.dart';
 import 'package:tre_flutter/pages/test_page.dart';
+import 'package:tre_flutter/pages/web_view_page.dart';
 import 'package:tre_flutter/widgets/page_route_anim.dart';
 
 class RouteName {
@@ -24,6 +25,7 @@ class RouteName {
   static const String splash = 'splash';
   static const String tab = '/';
   static const String article_detail = 'article_detail';
+  static const String web_view = 'web_view';
 }
 
 class Router {
@@ -49,6 +51,13 @@ class Router {
         return NoAnimRouteBuilder(TabNavigator());
       case RouteName.article_detail:
         return NoAnimRouteBuilder(ArticleDetailPage());
+      case RouteName.web_view:
+//        var url = settings.arguments as String;
+        var list = settings.arguments as List;
+        String title = list[0];
+        String url = list[1];
+        return NoAnimRouteBuilder(WebViewPage(title: title, url: url));
+      // default
       default:
         return CupertinoPageRoute(
             builder: (_) => Scaffold(
