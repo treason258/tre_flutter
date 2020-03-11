@@ -1,83 +1,173 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
+import 'package:tre_flutter/utils/random_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
 class HomePage extends StatefulWidget {
+  HomePage() {
+    log('HomePage | HomePage');
+  }
+
   @override
-  _HomePageState createState() => _HomePageState();
+  StatefulElement createElement() {
+    log('HomePage | createElement');
+    return super.createElement();
+  }
+
+  @override
+  _HomePageState createState() {
+    log('HomePage | createState');
+    return _HomePageState();
+  }
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ArticleModel> dataSource = [];
+  List<ArticleModel> mModelList = [];
+  bool mIsRequesting = false;
+  ScrollController mScrollController = new ScrollController();
 
   @override
   void initState() {
+    log('_HomePageState | initState');
     super.initState();
-    requestDataAndReload();
+    log('_HomePageState | initState | mScrollController.addListener');
+    mScrollController.addListener(() {
+      if (mScrollController.position.pixels == mScrollController.position.maxScrollExtent) {
+        log('_HomePageState | initState | mScrollController.position.pixels == mScrollController.position.maxScrollExtent');
+        _loadMoreData();
+      }
+    });
+
+    _refreshData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    log('_HomePageState | didChangeDependencies');
+  }
+
+  @override
+  void didUpdateWidget(HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    log('_HomePageState | didUpdateWidget');
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    log('_HomePageState | deactivate');
+  }
+
+  @override
+  void dispose() {
+    log('_HomePageState | dispose');
+    log('_HomePageState | dispose | mScrollController.dispose()');
+    mScrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    log('_HomePageState | build');
     return Scaffold(
       appBar: AppBar(
         title: Text('首页'),
       ),
       body: RefreshIndicator(
-        onRefresh: _refresh,
+        onRefresh: _refreshData,
         backgroundColor: Colors.blue,
         child: ListView.builder(
-          itemCount: dataSource.length,
+          itemCount: mModelList.length + 1,
           itemBuilder: (context, index) {
-            ArticleModel item = dataSource[index];
-            return ArticleItemWidget(
-              item,
-              index: index,
-              onTap: () async {
-                await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
-              },
-            );
+            if (index == mModelList.length) {
+              return _buildProgressIndicator();
+            } else {
+              ArticleModel item = mModelList[index];
+              return ArticleItemWidget(
+                item,
+                index: index,
+                onTap: () async {
+                  await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
+                },
+              );
+            }
           },
+          controller: mScrollController,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          mScrollController.animateTo(0, duration: new Duration(milliseconds: 200), curve: Curves.easeOut);
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.arrow_upward),
+      ),
+    );
+  }
+
+  /// 上拉加载更多转圈动画
+  Widget _buildProgressIndicator() {
+    log('_HomePageState | _buildProgressIndicator');
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: new Opacity(
+          opacity: mIsRequesting ? 1.0 : 0.0,
+          child: new CircularProgressIndicator(),
         ),
       ),
     );
   }
 
-  void requestDataAndReload() async {
-    int origin = ArticleModel.ORIGIN_CCTV;
-    int next = Random().nextInt(10);
-    print('matengfei | home_page.dart | requestDataAndReload | next = $next');
-    switch (next % 3) {
-      case 0:
-        origin = ArticleModel.ORIGIN_CCTV;
-        break;
-      case 1:
-        origin = ArticleModel.ORIGIN_JUHE_TOUTIAO;
-        break;
-      case 2:
-        origin = ArticleModel.ORIGIN_JUHE_WEIXIN;
-        break;
-    }
-    var models = await requestData(origin);
+  /// 下拉刷新数据
+  Future<Null> _refreshData() async {
+    log('_HomePageState | _refreshData');
+    var modelList = await _requestData(RandomUtils.getOrigin());
     setState(() {
-      dataSource = models;
+      mModelList = modelList;
     });
+    return;
   }
 
-  Future<Null> _refresh() async {
-    requestDataAndReload();
+  /// 上拉加载数据
+  Future<Null> _loadMoreData() async {
+    log('_HomePageState | _loadMoreData');
+    if (!mIsRequesting) {
+      setState(() => mIsRequesting = true);
+      List<ArticleModel> modelList;
+      if (RandomUtils.getTrueOrFalse()) {
+        log('_HomePageState | _requestData | 模拟请求正常数据');
+        modelList = await _requestData(RandomUtils.getOrigin());
+      } else {
+        log('_HomePageState | _requestData | 模拟请求无数据');
+        modelList = List();
+      }
+      if (modelList.isEmpty) {
+        double edge = 50.0;
+        double offsetFromBottom = mScrollController.position.maxScrollExtent - mScrollController.position.pixels;
+        if (offsetFromBottom < edge) {
+          mScrollController.animateTo(mScrollController.offset - (edge - offsetFromBottom), duration: new Duration(milliseconds: 500), curve: Curves.easeOut);
+        }
+        showToast("无更多数据");
+      }
+      setState(() {
+        mModelList.addAll(modelList);
+        mIsRequesting = false;
+      });
+    }
     return;
   }
 }
 
 /// 网络请求
-Future<List<ArticleModel>> requestData(int origin) async {
-  print('matengfei | home_page.dart | requestData | origin = $origin');
+Future<List<ArticleModel>> _requestData(int origin) async {
+  log('_HomePageState | _requestData | origin = $origin');
   Uri uri = ArticleModel.getUri(origin);
 
   HttpClient network = HttpClient();
@@ -85,9 +175,13 @@ Future<List<ArticleModel>> requestData(int origin) async {
   HttpClientResponse response = await request.close();
 
   var responseBody = await response.transform(utf8.decoder).join();
-  print('matengfei | home_page.dart | requestData | responseBody = $responseBody');
   Map responseData = json.decode(responseBody);
-  print('matengfei | home_page.dart | requestData | responseData = $responseData');
+  log('_HomePageState | _requestData | responseData = $responseData');
 
   return ArticleModel.parseList(responseData, origin);
+}
+
+/// 打印日志
+void log(String msg) {
+  print('matengfei | home_page.dart | $msg');
 }
