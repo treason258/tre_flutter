@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
@@ -26,47 +28,66 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('首页'),
       ),
-      body: ListView.builder(
-        itemCount: dataSource.length,
-        itemBuilder: (context, index) {
-          ArticleModel item = dataSource[index];
-          return ArticleItemWidget(
-            item,
-            index: index,
-            onTap: () async {
-              await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
-            },
-          );
-        },
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        backgroundColor: Colors.blue,
+        child: ListView.builder(
+          itemCount: dataSource.length,
+          itemBuilder: (context, index) {
+            ArticleModel item = dataSource[index];
+            return ArticleItemWidget(
+              item,
+              index: index,
+              onTap: () async {
+                await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
+              },
+            );
+          },
+        ),
       ),
     );
   }
 
   void requestDataAndReload() async {
-    var models = await requestData();
+    int origin = ArticleModel.ORIGIN_CCTV;
+    int next = Random().nextInt(10);
+    print('matengfei | home_page.dart | requestDataAndReload | next = $next');
+    switch (next % 3) {
+      case 0:
+        origin = ArticleModel.ORIGIN_CCTV;
+        break;
+      case 1:
+        origin = ArticleModel.ORIGIN_JUHE_TOUTIAO;
+        break;
+      case 2:
+        origin = ArticleModel.ORIGIN_JUHE_WEIXIN;
+        break;
+    }
+    var models = await requestData(origin);
     setState(() {
       dataSource = models;
     });
   }
+
+  Future<Null> _refresh() async {
+    requestDataAndReload();
+    return;
+  }
 }
 
 /// 网络请求
-Future<List<ArticleModel>> requestData() async {
-  // http://api.cportal.cctv.com/api/rest/navListInfo/getHandDataListInfoNew?id=Nav-9Nwml0dIB6wAxgd9EfZA160510&toutuNum=5&version=1&p=5&n=20
+Future<List<ArticleModel>> requestData(int origin) async {
+  print('matengfei | home_page.dart | requestData | origin = $origin');
+  Uri uri = ArticleModel.getUri(origin);
+
   HttpClient network = HttpClient();
-  Uri uri = Uri(scheme: 'http', host: 'api.cportal.cctv.com', path: '/api/rest/navListInfo/getHandDataListInfoNew', query: 'id=Nav-9Nwml0dIB6wAxgd9EfZA160510&toutuNum=5&version=1&p=5&n=20');
   HttpClientRequest request = await network.getUrl(uri);
   HttpClientResponse response = await request.close();
-  var responseBody = await response.transform(utf8.decoder).join();
-  Map dataDict = json.decode(responseBody);
-  print('matengfei | responseBody = $responseBody');
-  print('matengfei | dataDict = $dataDict');
 
-  List itemList = dataDict['itemList'] as List;
-  var models = itemList.map((map) {
-    map = map as Map;
-    ArticleModel model = ArticleModel.fromDict(map);
-    return model;
-  }).toList();
-  return models;
+  var responseBody = await response.transform(utf8.decoder).join();
+  print('matengfei | home_page.dart | requestData | responseBody = $responseBody');
+  Map responseData = json.decode(responseBody);
+  print('matengfei | home_page.dart | requestData | responseData = $responseData');
+
+  return ArticleModel.parseList(responseData, origin);
 }
