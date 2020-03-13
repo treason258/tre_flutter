@@ -1,3 +1,5 @@
+import 'package:oktoast/oktoast.dart';
+
 class ArticleModel {
   static const int ORIGIN_CCTV = 1;
   static const int ORIGIN_JUHE_TOUTIAO = 2;
@@ -46,16 +48,33 @@ class ArticleModel {
   }
 
   static Future<List<ArticleModel>> parseList(Map responseData, int origin) async {
-    List dataList;
+    List dataList = List<ArticleModel>();
     switch (origin) {
       case ORIGIN_CCTV:
-        dataList = responseData['itemList'] as List;
+        var itemList = responseData['itemList'];
+        if (itemList != null) {
+          dataList = itemList as List;
+        }
         break;
       case ORIGIN_JUHE_TOUTIAO:
-        dataList = responseData['result']['data'] as List;
+        var result = responseData['result'];
+        var reason = responseData['reason'];
+        if (result != null) {
+          dataList = result['data'] as List;
+          showToast(reason);
+        } else {
+          showToast(reason);
+        }
         break;
       case ORIGIN_JUHE_WEIXIN:
-        dataList = responseData['result']['list'] as List;
+        var result = responseData['result'];
+        var reason = responseData['reason'];
+        if (result != null) {
+          dataList = result['list'] as List;
+          showToast(reason);
+        } else {
+          showToast(reason);
+        }
         break;
     }
 
