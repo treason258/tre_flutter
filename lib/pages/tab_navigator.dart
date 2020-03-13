@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/generated/i18n.dart';
 import 'package:tre_flutter/pages/home_page.dart';
+import 'package:tre_flutter/pages/news_page.dart';
 import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/pages/user_page.dart';
 
-List<Widget> pages = <Widget>[HomePage(), UserPage(), TestPage()];
+List<Widget> pages = <Widget>[HomePage(), NewsPage(), UserPage(), TestPage()];
 
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
@@ -51,8 +52,12 @@ class _TabNavigatorState extends State<TabNavigator> {
             title: Text(S.of(context).tabHome),
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.format_list_bulleted),
+            title: Text("新闻"),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text(S.of(context).tabUser),
+            title: Text("我的"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.error),
