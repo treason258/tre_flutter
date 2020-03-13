@@ -21,10 +21,10 @@ class _ArticleListPageState extends State<ArticleListPage> {
   @override
   void initState() {
     super.initState();
-    log('_HomePageState | initState | mScrollController.addListener');
+    log('_ArticleListPageState | initState | mScrollController.addListener');
     mScrollController.addListener(() {
       if (mScrollController.position.pixels == mScrollController.position.maxScrollExtent) {
-        log('_HomePageState | initState | mScrollController.position.pixels == mScrollController.position.maxScrollExtent');
+        log('_ArticleListPageState | initState | mScrollController.position.pixels == mScrollController.position.maxScrollExtent');
         _loadMoreData();
       }
     });
@@ -69,7 +69,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
   /// 上拉加载更多转圈动画
   Widget _buildProgressIndicator() {
-    log('_HomePageState | _buildProgressIndicator');
+    log('_ArticleListPageState | _buildProgressIndicator');
     return new Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Center(
@@ -83,7 +83,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
   /// 下拉刷新数据
   Future<Null> _refreshData() async {
-    log('_HomePageState | _refreshData');
+    log('_ArticleListPageState | _refreshData');
     var modelList = await _requestData(RandomUtils.getOrigin());
     setState(() {
       mModelList = modelList;
@@ -93,15 +93,15 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
   /// 上拉加载数据
   Future<Null> _loadMoreData() async {
-    log('_HomePageState | _loadMoreData');
+    log('_ArticleListPageState | _loadMoreData');
     if (!mIsRequesting) {
       setState(() => mIsRequesting = true);
       List<ArticleModel> modelList;
       if (RandomUtils.getTrueOrFalse()) {
-        log('_HomePageState | _requestData | 模拟请求正常数据');
+        log('_ArticleListPageState | _requestData | 模拟请求正常数据');
         modelList = await _requestData(RandomUtils.getOrigin());
       } else {
-        log('_HomePageState | _requestData | 模拟请求无数据');
+        log('_ArticleListPageState | _requestData | 模拟请求无数据');
         modelList = List();
       }
       if (modelList.isEmpty) {
@@ -123,7 +123,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
 /// 网络请求
 Future<List<ArticleModel>> _requestData(int origin) async {
-  log('_HomePageState | _requestData | origin = $origin');
+  log('_ArticleListPageState | _requestData | origin = $origin');
   Uri uri = ArticleModel.getUri(origin);
 
   HttpClient network = HttpClient();
@@ -132,7 +132,7 @@ Future<List<ArticleModel>> _requestData(int origin) async {
 
   var responseBody = await response.transform(utf8.decoder).join();
   Map responseData = json.decode(responseBody);
-  log('_HomePageState | _requestData | responseData = $responseData');
+  log('_ArticleListPageState | _requestData | responseData = $responseData');
 
   return ArticleModel.parseList(responseData, origin);
 }
