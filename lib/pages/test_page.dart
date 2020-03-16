@@ -34,6 +34,6 @@ class _TestPageState extends State<TestPage> {
   }
 
   void pushNamed() {
-    Navigator.of(context).pushNamed(RouteName.test3);
+    Navigator.of(context).pushNamed(RouteName.test5);
   }
 }
