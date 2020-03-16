@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/generated/i18n.dart';
 import 'package:tre_flutter/pages/home_page.dart';
+import 'package:tre_flutter/pages/main_drawer.dart';
 import 'package:tre_flutter/pages/news_page.dart';
 import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/pages/user_page.dart';
@@ -43,6 +44,9 @@ class _TabNavigatorState extends State<TabNavigator> {
             });
           },
         ),
+      ),
+      drawer: new Drawer(
+        child: MainDrawer(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
