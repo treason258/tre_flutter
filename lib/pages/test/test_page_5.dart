@@ -48,6 +48,17 @@ class _TestPageState extends State<TestPage5> with TickerProviderStateMixin {
         fit: StackFit.expand,
         children: <Widget>[
           Image.asset('images/launch_image.png', fit: BoxFit.fill),
+          Align(
+            alignment: Alignment(0, 0),
+            child: Text(
+              'WELCOME',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                fontSize: 40,
+              ),
+            ),
+          ),
           AnimatedFlutterLogo(
             animation: _animation,
           ),

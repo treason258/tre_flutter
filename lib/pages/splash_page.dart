@@ -26,7 +26,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         fit: StackFit.expand,
         children: <Widget>[
           Image.asset('images/launch_image.png', fit: BoxFit.fill),
-          Text("HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld,"),
+          Align(
+            alignment: Alignment(0, 0),
+            child: Text(
+              'Welcome',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+                fontSize: 40,
+              ),
+            ),
+          ),
         ],
       ),
     );
