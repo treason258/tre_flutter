@@ -130,11 +130,16 @@ Future<List<ArticleModel>> _requestData(int origin) async {
   HttpClientRequest request = await network.getUrl(uri);
   HttpClientResponse response = await request.close();
 
-  var responseBody = await response.transform(utf8.decoder).join();
-  Map responseData = json.decode(responseBody);
-  log('_ArticleListPageState | _requestData | responseData = $responseData');
-
-  return ArticleModel.parseList(responseData, origin);
+  try {
+    var responseBody = await response.transform(utf8.decoder).join();
+    Map responseData = json.decode(responseBody);
+    log('_ArticleListPageState | _requestData | responseData = $responseData');
+    return ArticleModel.parseList(responseData, origin);
+  } catch (e) {
+    showToast("网络请求失败");
+    log('_ArticleListPageState | _requestData | e.toString() = ' + e.toString());
+    return new List();
+  }
 }
 
 /// 打印日志
