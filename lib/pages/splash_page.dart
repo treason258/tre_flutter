@@ -22,18 +22,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        alignment: Alignment.center,
-        color: Colors.blue,
-        child: Text(
-          'Welcome To SplashPage',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          ),
-        ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Image.asset('images/launch_image.png', fit: BoxFit.fill),
+          Text("HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld,"),
+        ],
       ),
     );
   }
