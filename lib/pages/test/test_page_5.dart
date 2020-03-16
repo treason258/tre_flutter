@@ -63,17 +63,6 @@ class _TestPageState extends State<TestPage5> with TickerProviderStateMixin {
             ),
           ),
           Align(
-            alignment: Alignment(0.0, 0.7),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                AnimatedAndroidLogo(
-                  animation: _animation,
-                ),
-              ],
-            ),
-          ),
-          Align(
             alignment: Alignment.bottomRight,
             child: SafeArea(
               child: InkWell(
