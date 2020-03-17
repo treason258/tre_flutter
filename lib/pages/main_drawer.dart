@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/test_page.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -96,7 +97,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage('assets/images/ic_avatar.jpg'),
+                          image: AssetImage(AssetsUtils.getImage('ic_avatar.jpg')),
                         ),
                       ),
                     ),

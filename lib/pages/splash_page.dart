@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/config/router_manger.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset('assets/images/launch_image.png', fit: BoxFit.fill),
+          Image.asset(AssetsUtils.getImage('launch_image.png'), fit: BoxFit.fill),
           Align(
             alignment: Alignment(0, 0),
             child: Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 
 class TestPage4 extends StatefulWidget {
   @override
@@ -9,11 +10,11 @@ class TestPage4 extends StatefulWidget {
 
 class _TestPageState extends State<TestPage4> {
   final List<String> images = [
-    'assets/images/ic_wallpaper_1.jpg',
-    'assets/images/ic_wallpaper_2.jpg',
-    'assets/images/ic_wallpaper_3.jpg',
-    'assets/images/ic_wallpaper_4.jpg',
-    'assets/images/ic_wallpaper_5.jpg',
+    AssetsUtils.getImage('ic_wallpaper_1.jpg'),
+    AssetsUtils.getImage('ic_wallpaper_2.jpg'),
+    AssetsUtils.getImage('ic_wallpaper_3.jpg'),
+    AssetsUtils.getImage('ic_wallpaper_4.jpg'),
+    AssetsUtils.getImage('ic_wallpaper_5.jpg'),
   ];
 
   final List<String> descriptions = [

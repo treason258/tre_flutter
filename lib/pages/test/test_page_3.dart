@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 
 class TestPage3 extends StatefulWidget {
   @override
@@ -96,7 +97,7 @@ class _TestItem extends StatelessWidget {
             color: Colors.green,
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: AssetImage('assets/images/news_image.png'),
+              image: AssetImage(AssetsUtils.getImage('news_image.png')),
               fit: BoxFit.cover,
             ),
           ),

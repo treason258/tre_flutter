@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/generated/i18n.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 
 class TestPage5 extends StatefulWidget {
   @override
@@ -47,7 +48,7 @@ class _TestPageState extends State<TestPage5> with TickerProviderStateMixin {
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.asset('assets/images/launch_image.png', fit: BoxFit.fill),
+          Image.asset(AssetsUtils.getImage('launch_image.png'), fit: BoxFit.fill),
           Align(
             alignment: Alignment(0, 0),
             child: Text(
@@ -136,7 +137,7 @@ class AnimatedFlutterLogo extends AnimatedWidget {
       alignment: Alignment(0, 0.2 + animation.value * 0.3),
       curve: Curves.bounceOut,
       child: Image.asset(
-        'assets/images/splash_flutter.png',
+        AssetsUtils.getImage('splash_flutter.png'),
         width: 280,
         height: 120,
       ),
@@ -157,12 +158,12 @@ class AnimatedAndroidLogo extends AnimatedWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Image.asset(
-          'assets/images/splash_fun.png',
+          AssetsUtils.getImage('splash_fun.png'),
           width: 140 * animation.value,
           height: 80 * animation.value,
         ),
         Image.asset(
-          'assets/images/splash_android.png',
+          AssetsUtils.getImage('splash_android.png'),
           width: 200 * (1 - animation.value),
           height: 80 * (1 - animation.value),
         ),
