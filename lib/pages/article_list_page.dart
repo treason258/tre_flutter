@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
@@ -52,7 +51,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
                 item,
                 index: index,
                 onTap: () async {
-                  await NavigatorUtils.jumpByName(context, RouteName.web_view, arguments: [item.title, item.url]);
+                  await NavigatorUtils.jumpByName(context, RouteName.web, arguments: [item.title, item.url]);
                 },
               );
             }

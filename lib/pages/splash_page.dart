@@ -17,8 +17,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     timer = new Timer(const Duration(milliseconds: 2000), () {
-      Navigator.of(context).pushReplacementNamed(RouteName.tab);
-      NavigatorUtils.jumpByName(context, RouteName.tab, replacement: true);
+      NavigatorUtils.jumpByName(context, RouteName.main, replacement: true);
     });
   }
 

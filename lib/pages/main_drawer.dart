@@ -127,7 +127,7 @@ class _MainDrawerState extends State<MainDrawer> {
               color: Colors.grey[200],
               child: new InkWell(
                 onTap: () {
-                  NavigatorUtils.jumpByName(context, RouteName.test0);
+                  NavigatorUtils.jumpByName(context, RouteName.test);
                 },
                 child: new Center(
                   child: new Text(

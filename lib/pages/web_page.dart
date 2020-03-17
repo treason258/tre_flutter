@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewPage extends StatefulWidget {
+class WebPage extends StatefulWidget {
   String title;
   String url;
 
-  WebViewPage({this.title, this.url}) {
+  WebPage({this.title, this.url}) {
     log('WebViewPage | WebViewPage');
   }
 
@@ -19,13 +19,13 @@ class WebViewPage extends StatefulWidget {
   }
 
   @override
-  _WebViewPageState createState() {
+  _WebPageState createState() {
     log('WebViewPage | createState');
-    return _WebViewPageState();
+    return _WebPageState();
   }
 }
 
-class _WebViewPageState extends State<WebViewPage> {
+class _WebPageState extends State<WebPage> {
   String title;
   WebViewController webViewController;
 
@@ -42,7 +42,7 @@ class _WebViewPageState extends State<WebViewPage> {
   }
 
   @override
-  void didUpdateWidget(WebViewPage oldWidget) {
+  void didUpdateWidget(WebPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     log('_WebViewPageState | didUpdateWidget');
   }
@@ -118,5 +118,5 @@ class _WebViewPageState extends State<WebViewPage> {
 }
 
 void log(String msg) {
-  LogUtils.printLog('matengfei | web_view_page.dart | $msg');
+  LogUtils.printLog('matengfei | web_page.dart | $msg');
 }

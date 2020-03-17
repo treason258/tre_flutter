@@ -9,14 +9,14 @@ import 'package:tre_flutter/pages/user_page.dart';
 
 List<Widget> pages = <Widget>[HomePage(), NewsPage(), UserPage(), TestPage()];
 
-class TabNavigator extends StatefulWidget {
-  TabNavigator({Key key}) : super(key: key);
+class MainPage extends StatefulWidget {
+  MainPage({Key key}) : super(key: key);
 
   @override
-  _TabNavigatorState createState() => _TabNavigatorState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _TabNavigatorState extends State<TabNavigator> {
+class _MainPageState extends State<MainPage> {
   var _pageController = PageController();
   int _selectedIndex = 0;
   DateTime _lastPressed;
