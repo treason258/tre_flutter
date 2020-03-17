@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/config/router_manger.dart';
+import 'package:tre_flutter/pages/test/test_page_3.dart';
 
 class TestPage extends StatefulWidget {
   TestPage({Key key}) : super(key: key);
@@ -15,13 +17,21 @@ class _TestPageState extends State<TestPage> {
       appBar: AppBar(
         title: Text('TestPage'),
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'Hello Wolrd!',
-            ),
+            RaisedButton(child: Text("TestPage1"), onPressed: () => Navigator.of(context).pushNamed(RouteName.test1)),
+            RaisedButton(child: Text("TestPage2"), onPressed: () => Navigator.of(context).pushNamed(RouteName.test2)),
+            RaisedButton(
+                child: Text("TestPage3"),
+                onPressed: () {
+//                Navigator.pushNamed(context, RouteName.test3);
+//                Navigator.of(context).pushNamed(RouteName.test2);
+                  Navigator.push(context, new CupertinoPageRoute<void>(builder: (ctx) => TestPage3()));
+                }),
           ],
         ),
       ),
