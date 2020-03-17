@@ -12,7 +12,7 @@ class NavigatorUtils {
   }
 
   /// 页面跳转：根据routeName
-  static Future<void> jumpByName(BuildContext context, String routeName, {Object arguments, bool replacement}) async {
+  static Future<void> jumpByName(BuildContext context, String routeName, {Object arguments, bool replacement: false}) async {
     if (replacement) {
       Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
     } else {
