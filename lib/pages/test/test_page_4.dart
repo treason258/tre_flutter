@@ -9,11 +9,11 @@ class TestPage4 extends StatefulWidget {
 
 class _TestPageState extends State<TestPage4> {
   final List<String> images = [
-    'images/ic_wallpaper_1.jpg',
-    'images/ic_wallpaper_2.jpg',
-    'images/ic_wallpaper_3.jpg',
-    'images/ic_wallpaper_4.jpg',
-    'images/ic_wallpaper_5.jpg',
+    'assets/images/ic_wallpaper_1.jpg',
+    'assets/images/ic_wallpaper_2.jpg',
+    'assets/images/ic_wallpaper_3.jpg',
+    'assets/images/ic_wallpaper_4.jpg',
+    'assets/images/ic_wallpaper_5.jpg',
   ];
 
   final List<String> descriptions = [

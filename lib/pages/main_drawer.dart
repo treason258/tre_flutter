@@ -96,7 +96,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage('images/ic_avatar.jpg'),
+                          image: AssetImage('assets/images/ic_avatar.jpg'),
                         ),
                       ),
                     ),

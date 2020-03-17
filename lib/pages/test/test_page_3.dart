@@ -96,7 +96,7 @@ class _TestItem extends StatelessWidget {
             color: Colors.green,
             borderRadius: BorderRadius.circular(5.0),
             image: DecorationImage(
-              image: AssetImage('images/news_image.png'),
+              image: AssetImage('assets/images/news_image.png'),
               fit: BoxFit.cover,
             ),
           ),
