@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/navigator_utils.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     super.initState();
     timer = new Timer(const Duration(milliseconds: 2000), () {
       Navigator.of(context).pushReplacementNamed(RouteName.tab);
+      NavigatorUtils.jumpByName(context, RouteName.tab, replacement: true);
     });
   }
 

@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tre_flutter/config/router_manger.dart';
+import 'package:tre_flutter/pages/test/test_page_1.dart';
+import 'package:tre_flutter/pages/test/test_page_2.dart';
 import 'package:tre_flutter/pages/test/test_page_3.dart';
+import 'package:tre_flutter/pages/test/test_page_4.dart';
+import 'package:tre_flutter/pages/test/test_page_5.dart';
+import 'package:tre_flutter/utils/navigator_utils.dart';
 
 class TestPage extends StatefulWidget {
   TestPage({Key key}) : super(key: key);
@@ -23,27 +27,14 @@ class _TestPageState extends State<TestPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            RaisedButton(child: Text("TestPage1"), onPressed: () => Navigator.of(context).pushNamed(RouteName.test1)),
-            RaisedButton(child: Text("TestPage2"), onPressed: () => Navigator.of(context).pushNamed(RouteName.test2)),
-            RaisedButton(
-                child: Text("TestPage3"),
-                onPressed: () {
-//                Navigator.pushNamed(context, RouteName.test3);
-//                Navigator.of(context).pushNamed(RouteName.test2);
-                  Navigator.push(context, new CupertinoPageRoute<void>(builder: (ctx) => TestPage3()));
-                }),
+            RaisedButton(child: Text("TestPage1"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage1())),
+            RaisedButton(child: Text("TestPage2"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage2())),
+            RaisedButton(child: Text("TestPage3"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage3())),
+            RaisedButton(child: Text("TestPage4"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage4())),
+            RaisedButton(child: Text("TestPage5"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage5())),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: pushNamed,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-
-  void pushNamed() {
-    Navigator.of(context).pushNamed(RouteName.test5);
   }
 }

@@ -6,6 +6,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
+import 'package:tre_flutter/utils/navigator_utils.dart';
 import 'package:tre_flutter/utils/random_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
@@ -51,7 +52,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
                 item,
                 index: index,
                 onTap: () async {
-                  await Navigator.of(context).pushNamed(RouteName.web_view, arguments: [item.title, item.url]);
+                  await NavigatorUtils.jumpByName(context, RouteName.web_view, arguments: [item.title, item.url]);
                 },
               );
             }

@@ -6,6 +6,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
+import 'package:tre_flutter/utils/navigator_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
@@ -38,7 +39,7 @@ class _ArticlePageState extends State<ArticlePage> {
             index: index,
             onTap: () async {
               ToastUtils.show('onItemClick | index = $index');
-              await Navigator.of(context).pushNamed(RouteName.article_detail);
+              await NavigatorUtils.jumpByName(context,RouteName.article_detail);
             },
           );
         },

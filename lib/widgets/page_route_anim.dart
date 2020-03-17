@@ -5,10 +5,11 @@ class NoAnimRouteBuilder extends PageRouteBuilder {
 
   NoAnimRouteBuilder(this.page)
       : super(
-            opaque: false,
-            pageBuilder: (context, animation, secondaryAnimation) => page,
-            transitionDuration: Duration(milliseconds: 0),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) => child);
+          opaque: false,
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: Duration(milliseconds: 0),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) => child,
+        );
 }
 
 class FadeRouteBuilder extends PageRouteBuilder {
@@ -16,15 +17,13 @@ class FadeRouteBuilder extends PageRouteBuilder {
 
   FadeRouteBuilder(this.page)
       : super(
-            pageBuilder: (context, animation, secondaryAnimation) => page,
-            transitionDuration: Duration(milliseconds: 500),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
-                  opacity: Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
-                    parent: animation,
-                    curve: Curves.fastOutSlowIn,
-                  )),
-                  child: child,
-                ));
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: Duration(milliseconds: 500),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
+            opacity: Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn)),
+            child: child,
+          ),
+        );
 }
 
 class SlideTopRouteBuilder extends PageRouteBuilder {
@@ -32,12 +31,13 @@ class SlideTopRouteBuilder extends PageRouteBuilder {
 
   SlideTopRouteBuilder(this.page)
       : super(
-            pageBuilder: (context, animation, secondaryAnimation) => page,
-            transitionDuration: Duration(milliseconds: 800),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) => SlideTransition(
-                  position: Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0)).animate(CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn)),
-                  child: child,
-                ));
+          pageBuilder: (context, animation, secondaryAnimation) => page,
+          transitionDuration: Duration(milliseconds: 800),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) => SlideTransition(
+            position: Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0)).animate(CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn)),
+            child: child,
+          ),
+        );
 }
 
 class SizeRoute extends PageRouteBuilder {
@@ -47,13 +47,34 @@ class SizeRoute extends PageRouteBuilder {
       : super(
           pageBuilder: (context, animation, secondaryAnimation) => page,
           transitionDuration: Duration(milliseconds: 300),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-//                Align(
-//                  child: SizeTransition(child: child, sizeFactor: animation),
-//                ),
-              ScaleTransition(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) => ScaleTransition(
             scale: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn)),
             child: child,
           ),
         );
+}
+
+/// ???
+class PopRoute extends PopupRoute {
+  final Duration _duration = Duration(milliseconds: 300);
+  Widget child;
+
+  PopRoute({@required this.child});
+
+  @override
+  Color get barrierColor => null;
+
+  @override
+  bool get barrierDismissible => true;
+
+  @override
+  String get barrierLabel => null;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return child;
+  }
+
+  @override
+  Duration get transitionDuration => _duration;
 }

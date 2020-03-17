@@ -4,6 +4,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/navigator_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -126,7 +127,7 @@ class _MainDrawerState extends State<MainDrawer> {
               color: Colors.grey[200],
               child: new InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, RouteName.test0);
+                  NavigatorUtils.jumpByName(context, RouteName.test0);
                 },
                 child: new Center(
                   child: new Text(
@@ -151,7 +152,7 @@ class _MainDrawerState extends State<MainDrawer> {
                         _showLoginOutDialog(context);
                       } else if (pageInfo.titleId == "收藏") {
                       } else {
-                        Navigator.push(context, new CupertinoPageRoute<void>(builder: (ctx) => pageInfo.page));
+                        NavigatorUtils.jumpByWidget(context, pageInfo.page);
                       }
                     },
                   );
