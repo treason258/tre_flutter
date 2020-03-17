@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
+import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
@@ -62,8 +63,8 @@ Future<List<ArticleModel>> requestData() async {
   HttpClientResponse response = await request.close();
   var responseBody = await response.transform(utf8.decoder).join();
   Map dataDict = json.decode(responseBody);
-  print('matengfei | responseBody = $responseBody');
-  print('matengfei | dataDict = $dataDict');
+  LogUtils.printLog('matengfei | responseBody = $responseBody');
+  LogUtils.printLog('matengfei | dataDict = $dataDict');
 
   List itemList = dataDict['itemList'] as List;
   var models = itemList.map((map) {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
@@ -117,5 +118,5 @@ class _WebViewPageState extends State<WebViewPage> {
 }
 
 void log(String msg) {
-  print('matengfei | web_view_page.dart | $msg');
+  LogUtils.printLog('matengfei | web_view_page.dart | $msg');
 }

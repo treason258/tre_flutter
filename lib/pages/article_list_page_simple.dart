@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tre_flutter/utils/log_utils.dart';
 
 class ArticleListPageSimple extends StatefulWidget {
   @override
@@ -28,5 +29,5 @@ class _ArticleListPageSimpleState extends State<ArticleListPageSimple> {
 
 /// 打印日志
 void log(String msg) {
-  print('matengfei | article_list_page_simple.dart | $msg');
+  LogUtils.printLog('matengfei | article_list_page_simple.dart | $msg');
 }

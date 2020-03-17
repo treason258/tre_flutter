@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
+import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:tre_flutter/utils/random_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
@@ -145,5 +146,5 @@ Future<List<ArticleModel>> _requestData(int origin) async {
 
 /// 打印日志
 void log(String msg) {
-  print('matengfei | article_list_page.dart | $msg');
+  LogUtils.printLog('matengfei | article_list_page.dart | $msg');
 }

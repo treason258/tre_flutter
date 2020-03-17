@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/pages/article_list_page.dart';
+import 'package:tre_flutter/utils/log_utils.dart';
 
 class HomePage extends StatefulWidget {
   HomePage() {
@@ -65,5 +66,5 @@ class _HomePageState extends State<HomePage> {
 
 /// 打印日志
 void log(String msg) {
-  print('matengfei | home_page.dart | $msg');
+  LogUtils.printLog('matengfei | home_page.dart | $msg');
 }
