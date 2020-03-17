@@ -6,6 +6,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
 import 'package:tre_flutter/utils/random_utils.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
 class ArticleListPage extends StatefulWidget {
@@ -110,7 +111,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
         if (offsetFromBottom < edge) {
           mScrollController.animateTo(mScrollController.offset - (edge - offsetFromBottom), duration: new Duration(milliseconds: 500), curve: Curves.easeOut);
         }
-        showToast("无更多数据");
+        ToastUtils.show("无更多数据");
       }
       setState(() {
         mModelList.addAll(modelList);
@@ -136,7 +137,7 @@ Future<List<ArticleModel>> _requestData(int origin) async {
     log('_ArticleListPageState | _requestData | responseData = $responseData');
     return ArticleModel.parseList(responseData, origin);
   } catch (e) {
-    showToast("网络请求失败");
+    ToastUtils.show("网络请求失败");
     log('_ArticleListPageState | _requestData | e.toString() = ' + e.toString());
     return new List();
   }

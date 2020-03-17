@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class TestPage3 extends StatefulWidget {
   @override
@@ -73,7 +74,7 @@ class _TestItem extends StatelessWidget {
                   shape: StadiumBorder(),
                   child: RaisedButton(
                     onPressed: () {
-                      showToast('onTagClick');
+                      ToastUtils.show('onTagClick');
                     },
                     padding: EdgeInsets.all(2.0),
                     child: Text(

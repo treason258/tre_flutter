@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class TestPage2 extends StatefulWidget {
   @override
@@ -38,6 +39,6 @@ class _TestPageState extends State<TestPage2> {
     setState(() {
       timestamp = timestampNew;
     });
-    showToast("当前时间：" + timestampNew.toString(), context: context);
+    ToastUtils.show("当前时间：" + timestampNew.toString());
   }
 }

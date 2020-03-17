@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/generated/i18n.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class TestPage5 extends StatefulWidget {
   @override
@@ -173,5 +174,5 @@ class AnimatedAndroidLogo extends AnimatedWidget {
 }
 
 void nextPage(context) {
-  showToast('nextPage');
+  ToastUtils.show('nextPage');
 }

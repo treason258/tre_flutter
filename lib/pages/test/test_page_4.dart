@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class TestPage4 extends StatefulWidget {
   @override
@@ -52,7 +53,7 @@ class _TestPageState extends State<TestPage4> {
                 scrollDirection: Axis.horizontal,
                 autoplay: true,
                 onTap: (int index) {
-                  showToast('点击了第$index个');
+                  ToastUtils.show('点击了第$index个');
                 },
               )),
           Center(
@@ -65,7 +66,7 @@ class _TestPageState extends State<TestPage4> {
                     padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 15.0),
                     child: GestureDetector(
                       onTap: () {
-                        showToast(descriptions[index]);
+                        ToastUtils.show(descriptions[index]);
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(6.0),
@@ -92,7 +93,7 @@ class _TestPageState extends State<TestPage4> {
                 viewportFraction: 0.95,
                 autoplay: true,
                 onTap: (int index) {
-                  showToast('点击了第$index个');
+                  ToastUtils.show('点击了第$index个');
                 },
               ),
             ),
@@ -107,7 +108,7 @@ class _TestPageState extends State<TestPage4> {
                     padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 0.0),
                     child: GestureDetector(
                       onTap: () {
-                        showToast(descriptions[index]);
+                        ToastUtils.show(descriptions[index]);
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(6.0),
@@ -135,7 +136,7 @@ class _TestPageState extends State<TestPage4> {
                 scale: 0.85,
                 autoplay: true,
                 onTap: (int index) {
-                  showToast('点击了第$index个');
+                  ToastUtils.show('点击了第$index个');
                 },
               ),
             ),

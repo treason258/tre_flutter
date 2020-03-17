@@ -4,6 +4,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/test_page.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class MainDrawer extends StatefulWidget {
   @override
@@ -64,7 +65,7 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                 ),
                 onPressed: () {
-                  showToast("退出");
+                  ToastUtils.show("退出");
                   Navigator.pop(ctx);
                   Navigator.pop(context);
                 },

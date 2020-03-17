@@ -1,4 +1,5 @@
 import 'package:oktoast/oktoast.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 
 class ArticleModel {
   static const int ORIGIN_CCTV = 1;
@@ -61,9 +62,9 @@ class ArticleModel {
         var reason = responseData['reason'];
         if (result != null) {
           dataList = result['data'] as List;
-          showToast(reason);
+          ToastUtils.show(reason);
         } else {
-          showToast(reason);
+          ToastUtils.show(reason);
         }
         break;
       case ORIGIN_JUHE_WEIXIN:
@@ -71,9 +72,9 @@ class ArticleModel {
         var reason = responseData['reason'];
         if (result != null) {
           dataList = result['list'] as List;
-          showToast(reason);
+          ToastUtils.show(reason);
         } else {
-          showToast(reason);
+          ToastUtils.show(reason);
         }
         break;
     }

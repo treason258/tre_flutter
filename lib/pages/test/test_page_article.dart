@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
 import 'package:tre_flutter/pages/article_item_widget.dart';
+import 'package:tre_flutter/utils/toast_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
 class ArticlePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ArticlePageState extends State<ArticlePage> {
             item,
             index: index,
             onTap: () async {
-              showToast('onItemClick | index = $index');
+              ToastUtils.show('onItemClick | index = $index');
               await Navigator.of(context).pushNamed(RouteName.article_detail);
             },
           );
