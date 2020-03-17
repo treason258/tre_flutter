@@ -27,6 +27,12 @@ class _TestPageState extends State<TestPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            RaisedButton(
+              child: Text("TestPage0"),
+              onPressed: () {
+                NavigatorUtils.jumpToNewPage(context, "TestPage0", "Welcome to TestPage0");
+              },
+            ),
             RaisedButton(child: Text("TestPage1"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage1())),
             RaisedButton(child: Text("TestPage2"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage2())),
             RaisedButton(child: Text("TestPage3"), onPressed: () => NavigatorUtils.jumpByWidget(context, TestPage3())),

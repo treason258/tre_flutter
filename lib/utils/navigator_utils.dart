@@ -6,18 +6,49 @@ import 'package:tre_flutter/widgets/page_route_anim.dart';
 class NavigatorUtils {
   /**************** 页面跳转 ****************/
 
-  /// 页面跳转：根据widget
-  static Future<void> jumpByWidget(BuildContext context, Widget widget) async {
-    Navigator.push(context, getCupertinoPageRoute(widget));
-  }
-
-  /// 页面跳转：根据routeName
+  /// 页面跳转：根据 routeName
   static Future<void> jumpByName(BuildContext context, String routeName, {Object arguments, bool replacement: false}) async {
     if (replacement) {
       Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
     } else {
       Navigator.pushNamed(context, routeName, arguments: arguments);
     }
+  }
+
+  /// 页面跳转：根据 route
+  static Future<void> jumpByRoute(BuildContext context, Route route, {bool replacement: false}) async {
+    if (replacement) {
+      Navigator.pushReplacement(context, route);
+    } else {
+      Navigator.push(context, route);
+    }
+  }
+
+  /// 页面跳转：根据 widget
+  static Future<void> jumpByWidget(BuildContext context, Widget widget, {bool replacement: false}) async {
+    jumpByRoute(context, getCupertinoPageRoute(widget), replacement: replacement);
+  }
+
+  /// 页面跳转：跳转到新页面
+  static Future<void> jumpToNewPage(BuildContext context, String title, String content) async {
+    Route route = CupertinoPageRoute(
+      builder: (ctx) => Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Center(
+          child: Text(
+            content,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ),
+          ),
+        ),
+      ),
+    );
+    jumpByRoute(context, route);
   }
 
   /**************** 页面进入效果 ****************/

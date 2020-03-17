@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:tre_flutter/config/router_manger.dart';
-import 'package:tre_flutter/pages/test_page.dart';
+import 'package:tre_flutter/pages/test/test_page_1.dart';
 import 'package:tre_flutter/utils/assets_utils.dart';
 import 'package:tre_flutter/utils/navigator_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
@@ -30,9 +29,9 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   void initState() {
     super.initState();
-    _pageInfo.add(PageInfo("设置", Icons.settings, TestPage()));
-    _pageInfo.add(PageInfo("关于", Icons.info, TestPage()));
-    _pageInfo.add(PageInfo("注销", Icons.exit_to_app, TestPage()));
+    _pageInfo.add(PageInfo("设置", Icons.settings, TestPage1()));
+    _pageInfo.add(PageInfo("关于", Icons.info, TestPage1()));
+    _pageInfo.add(PageInfo("注销", Icons.exit_to_app, TestPage1()));
   }
 
   /// 显示注销登录弹窗
@@ -127,7 +126,8 @@ class _MainDrawerState extends State<MainDrawer> {
               color: Colors.grey[200],
               child: new InkWell(
                 onTap: () {
-                  NavigatorUtils.jumpByName(context, RouteName.test);
+//                  NavigatorUtils.jumpByName(context, "222");
+                  NavigatorUtils.jumpToNewPage(context, "Flutter Demos", "Flutter Demos Flutter Demos");
                 },
                 child: new Center(
                   child: new Text(
