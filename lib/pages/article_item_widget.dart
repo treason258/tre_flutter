@@ -4,9 +4,10 @@ import 'package:tre_flutter/view_model/article_model.dart';
 class ArticleItemWidget extends StatelessWidget {
   final ArticleModel model;
   final int index;
+  final int indexReal;
   final GestureTapCallback onTap;
 
-  ArticleItemWidget(this.model, {this.index, this.onTap});
+  ArticleItemWidget(this.model, {this.index, this.indexReal, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,7 @@ class ArticleItemWidget extends StatelessWidget {
   }
 
   Widget get _itemContentView {
+    String indexInfo = "[" + index.toString() + "-" + indexReal.toString() + "] ";
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -57,7 +59,7 @@ class ArticleItemWidget extends StatelessWidget {
                 height: 20.0,
                 margin: EdgeInsets.only(top: 26.0),
                 child: Text(
-                  model.time,
+                  indexInfo + model.time,
                   style: TextStyle(
                     fontSize: 11.0,
                     color: Color(0xff333333),

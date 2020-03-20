@@ -8,9 +8,18 @@ import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:tre_flutter/utils/navigator_utils.dart';
 import 'package:tre_flutter/utils/random_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
+import 'package:tre_flutter/utils/widget_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
+typedef HeaderWidgetBuild = Widget Function(BuildContext context, int index);
+typedef FooterWidgetBuild = Widget Function(BuildContext context, int index);
+
 class ArticleListPage extends StatefulWidget {
+  HeaderWidgetBuild headerCreator;
+  FooterWidgetBuild footerCreator;
+
+  ArticleListPage({Key key, HeaderWidgetBuild this.headerCreator, FooterWidgetBuild this.footerCreator}) : super(key: key);
+
   @override
   _ArticleListPageState createState() => _ArticleListPageState();
 }
@@ -19,6 +28,11 @@ class _ArticleListPageState extends State<ArticleListPage> {
   List<ArticleModel> mModelList = [];
   bool mIsRequesting = false;
   ScrollController mScrollController = new ScrollController();
+
+  int itemModelCount = 0;
+  int itemHeaderCount = 1;
+  int itemFooterCount = 1;
+  int itemLoadCount = 1;
 
   @override
   void initState() {
@@ -36,20 +50,35 @@ class _ArticleListPageState extends State<ArticleListPage> {
 
   @override
   Widget build(BuildContext context) {
+    itemModelCount = mModelList.length;
+    log("_ArticleListPageState | build | itemModelCount = " + itemModelCount.toString());
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: _refreshData,
         backgroundColor: Colors.blue,
         child: ListView.builder(
-          itemCount: mModelList.length + 1,
+          // 假设itemModelCount=10，则共需要13个位置用于展示
+          // 0-header; 1~10-model; 11-footer; 12-loadMore
+          // 所以modelItem真实index需要减掉1
+          itemCount: itemModelCount + itemHeaderCount + itemFooterCount + itemLoadCount,
           itemBuilder: (context, index) {
-            if (index == mModelList.length) {
+            if (index == 0) {
+              // 0-header
+              return _headerItemWidget(context, index);
+            } else if (index == itemModelCount + itemHeaderCount) {
+              // 11-footer
+              return _footerItemWidget(context, index);
+            } else if (index == itemModelCount + itemHeaderCount + itemFooterCount) {
+              // 12-loadMore
               return _buildProgressIndicator();
             } else {
-              ArticleModel item = mModelList[index];
+              // 1~10-model
+              int indexReal = index - itemHeaderCount;
+              ArticleModel item = mModelList[indexReal];
               return ArticleItemWidget(
                 item,
                 index: index,
+                indexReal: indexReal,
                 onTap: () async {
                   await NavigatorUtils.jumpByName(context, RouteName.web, arguments: [item.title, item.url]);
                 },
@@ -76,7 +105,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
       padding: const EdgeInsets.all(8.0),
       child: new Center(
         child: new Opacity(
-          opacity: mIsRequesting ? 1.0 : 0.0,
+          opacity: 1.0, // mIsRequesting ? 1.0 : 0.0,
           child: new CircularProgressIndicator(),
         ),
       ),
@@ -120,6 +149,22 @@ class _ArticleListPageState extends State<ArticleListPage> {
       });
     }
     return;
+  }
+
+  Widget _headerItemWidget(BuildContext context, int index) {
+    if (widget.headerCreator != null) {
+      return widget.headerCreator(context, index);
+    } else {
+      return WidgetUtils.buildNullWidget();
+    }
+  }
+
+  Widget _footerItemWidget(BuildContext context, int index) {
+    if (widget.footerCreator != null) {
+      return widget.footerCreator(context, index);
+    } else {
+      return WidgetUtils.buildNullWidget();
+    }
   }
 }
 

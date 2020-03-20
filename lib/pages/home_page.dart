@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/pages/article_list_page.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
+import 'package:tre_flutter/utils/widget_utils.dart';
 
 class HomePage extends StatefulWidget {
   HomePage() {
@@ -59,8 +60,19 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('首页'),
       ),
-      body: ArticleListPage(),
+      body: ArticleListPage(
+        headerCreator: getHeaderWidget,
+        footerCreator: getFooterWidget,
+      ),
     );
+  }
+
+  Widget getHeaderWidget(BuildContext context, int index) {
+    return WidgetUtils.buildTextWidget("Header From HomePage | 333 | index = $index");
+  }
+
+  Widget getFooterWidget(BuildContext context, int index) {
+    return WidgetUtils.buildTextWidget("Footer From HomePage | 333 | index = $index");
   }
 }
 
