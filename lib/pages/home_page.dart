@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/pages/article_list_page.dart';
+import 'package:tre_flutter/pages/home_banner.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:tre_flutter/utils/widget_utils.dart';
 
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     log('_HomePageState | build');
     return Scaffold(
       appBar: AppBar(
-        title: Text('首页'),
+        title: Center(child: Text('首页')),
       ),
       body: ArticleListPage(
         headerCreator: getHeaderWidget,
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getHeaderWidget(BuildContext context, int index) {
-    return WidgetUtils.buildTextWidget("Header From HomePage | 333 | index = $index");
+    return HomeBanner();
   }
 
   Widget getFooterWidget(BuildContext context, int index) {
