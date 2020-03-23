@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
       body: ArticleListPage(
         headerCreator: getHeaderWidget,
         footerCreator: getFooterWidget,
+        footer2: WidgetUtils.buildTextWidget("Footer2 From HomePage | 333"),
       ),
     );
   }

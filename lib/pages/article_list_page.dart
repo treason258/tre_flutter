@@ -17,22 +17,27 @@ typedef FooterWidgetBuild = Widget Function(BuildContext context, int index);
 class ArticleListPage extends StatefulWidget {
   HeaderWidgetBuild headerCreator;
   FooterWidgetBuild footerCreator;
+  Widget footer2;
 
-  ArticleListPage({Key key, HeaderWidgetBuild this.headerCreator, FooterWidgetBuild this.footerCreator}) : super(key: key);
+  ArticleListPage({Key key, this.headerCreator, this.footerCreator, this.footer2}) : super(key: key);
 
   @override
-  _ArticleListPageState createState() => _ArticleListPageState();
+  _ArticleListPageState createState() => _ArticleListPageState(footer2: footer2);
 }
 
 class _ArticleListPageState extends State<ArticleListPage> {
   List<ArticleModel> mModelList = [];
   bool mIsRequesting = false;
   ScrollController mScrollController = new ScrollController();
+  Widget footer2;
 
   int itemModelCount = 0;
   int itemHeaderCount = 1;
   int itemFooterCount = 1;
-  int itemLoadCount = 1;
+  int itemFooter2Count = 1;
+  int itemLoadMoreCount = 1;
+
+  _ArticleListPageState({this.footer2});
 
   @override
   void initState() {
@@ -57,20 +62,19 @@ class _ArticleListPageState extends State<ArticleListPage> {
         onRefresh: _refreshData,
         backgroundColor: Colors.blue,
         child: ListView.builder(
-          // 假设itemModelCount=10，则共需要13个位置用于展示
-          // 0-header; 1~10-model; 11-footer; 12-loadMore
+          // 假设itemModelCount=10，则共需要14个位置用于展示
+          // 0-header; 1~10-model; 11-footer; 12-footer2; 13-loadMore
           // 所以modelItem真实index需要减掉1
-          itemCount: itemModelCount + itemHeaderCount + itemFooterCount + itemLoadCount,
+          itemCount: itemModelCount + itemHeaderCount + itemFooterCount + itemFooter2Count + itemLoadMoreCount,
           itemBuilder: (context, index) {
             if (index == 0) {
-              // 0-header
-              return _headerItemWidget(context, index);
+              return _headerItemWidget(context, index); // 0-header
             } else if (index == itemModelCount + itemHeaderCount) {
-              // 11-footer
-              return _footerItemWidget(context, index);
+              return _footerItemWidget(context, index); // 11-footer
             } else if (index == itemModelCount + itemHeaderCount + itemFooterCount) {
-              // 12-loadMore
-              return _buildProgressIndicator();
+              return _footer2ItemWidget(); // 12-footer2
+            } else if (index == itemModelCount + itemHeaderCount + itemFooterCount + itemFooter2Count) {
+              return _buildProgressIndicator(); // 13-loadMore
             } else {
               // 1~10-model
               int indexReal = index - itemHeaderCount;
@@ -162,6 +166,14 @@ class _ArticleListPageState extends State<ArticleListPage> {
   Widget _footerItemWidget(BuildContext context, int index) {
     if (widget.footerCreator != null) {
       return widget.footerCreator(context, index);
+    } else {
+      return WidgetUtils.buildNullWidget();
+    }
+  }
+
+  Widget _footer2ItemWidget() {
+    if (footer2 != null) {
+      return footer2;
     } else {
       return WidgetUtils.buildNullWidget();
     }
