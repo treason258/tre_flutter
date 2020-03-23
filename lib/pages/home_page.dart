@@ -70,11 +70,37 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getHeaderWidget(BuildContext context, int index) {
-    return HomeBanner();
+    return Container(
+        child: Column(
+      children: <Widget>[
+        HomeBanner(),
+        buildHomeMenu(),
+      ],
+    ));
   }
 
   Widget getFooterWidget(BuildContext context, int index) {
     return WidgetUtils.buildTextWidget("Footer From HomePage | 333 | index = $index");
+  }
+
+  Widget buildHomeMenu() {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 8,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4, // 横轴元素个数
+        crossAxisSpacing: 10.0, // 横轴间距
+        mainAxisSpacing: 10.0, // 纵轴间距
+        childAspectRatio: 2.0, // 子组件宽高长度比例
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        return new GestureDetector(
+          onTap: () {},
+          child: WidgetUtils.buildTextWidget("菜单$index"),
+        );
+      },
+    );
   }
 }
 
