@@ -6,6 +6,7 @@ import 'package:tre_flutter/pages/test/test_page_3.dart';
 import 'package:tre_flutter/pages/test/test_page_4.dart';
 import 'package:tre_flutter/pages/test/test_page_4a.dart';
 import 'package:tre_flutter/pages/test/test_page_5.dart';
+import 'package:tre_flutter/pages/test/test_page_6.dart';
 import 'package:tre_flutter/pages/test/test_page_99.dart';
 import 'package:tre_flutter/utils/navigator_utils.dart';
 
@@ -46,6 +47,7 @@ class _TestPageState extends State<TestPage> {
               buildItemWidget("TestPage4-轮播图", TestPage4()),
               buildItemWidget("TestPage4a-轮播图", TestPage4a()),
               buildItemWidget("TestPage5-闪屏页动画", TestPage5()),
+              buildItemWidget("TestPage6-buildStudyWidget", TestPage6()),
               buildItemWidget("TestPage99", TestPage99()),
               buildItemWidget("TestPage99", TestPage99()),
               buildItemWidget("TestPage99", TestPage99()),
