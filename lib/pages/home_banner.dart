@@ -22,7 +22,7 @@ class _HomeBannerState extends State<HomeBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return buildBannerByType(3);
+    return buildBannerByType(1);
   }
 
   Widget buildBannerByType(int type) {
@@ -84,7 +84,7 @@ class _HomeBannerState extends State<HomeBanner> {
             );
           },
           pagination: SwiperPagination(
-            builder: DotSwiperPaginationBuilder(color: Colors.black38, activeColor: Colors.white),
+            builder: DotSwiperPaginationBuilder(color: Colors.black45, activeColor: Colors.white, size: 6, activeSize: 6),
             margin: EdgeInsets.only(bottom: paginationMarginBottom),
           ),
           control: null,

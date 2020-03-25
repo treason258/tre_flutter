@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tre_flutter/pages/article_list_page.dart';
 import 'package:tre_flutter/pages/home_banner.dart';
+import 'package:tre_flutter/utils/color_utils.dart';
 import 'package:tre_flutter/utils/log_utils.dart';
 import 'package:tre_flutter/utils/widget_utils.dart';
 
@@ -75,6 +76,7 @@ class _HomePageState extends State<HomePage> {
       children: <Widget>[
         HomeBanner(),
         buildHomeMenu(),
+        WidgetUtils.buildLine(lineHeight: 5, lineColor: ColorUtils.ffeeeeee),
       ],
     ));
   }
@@ -84,22 +86,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildHomeMenu() {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: 8,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4, // 横轴元素个数
-        crossAxisSpacing: 10.0, // 横轴间距
-        mainAxisSpacing: 10.0, // 纵轴间距
-        childAspectRatio: 2.0, // 子组件宽高长度比例
+    return Container(
+      color: Colors.transparent,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: 8,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4, // 横轴元素个数
+            crossAxisSpacing: 2, // 横轴间距
+            mainAxisSpacing: 2, // 纵轴间距
+            childAspectRatio: 2, // 子组件宽高长度比例
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            return WidgetUtils.buildTextWidget("菜单$index", backgroundColor: Colors.transparent, textColor: Colors.black, onTapText: "菜单$index");
+          },
+        ),
       ),
-      itemBuilder: (BuildContext context, int index) {
-        return new GestureDetector(
-          onTap: () {},
-          child: WidgetUtils.buildTextWidget("菜单$index"),
-        );
-      },
     );
   }
 }

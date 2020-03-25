@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tre_flutter/utils/color_utils.dart';
+import 'package:tre_flutter/utils/widget_utils.dart';
 import 'package:tre_flutter/view_model/article_model.dart';
 
 class ArticleItemWidget extends StatelessWidget {
@@ -26,11 +28,7 @@ class ArticleItemWidget extends StatelessWidget {
               child: _itemContentView,
             ),
             // 分割线
-            Container(
-              margin: EdgeInsets.only(top: 0.0),
-              color: Color(0xffeeeeee),
-              constraints: BoxConstraints.expand(height: 3.0),
-            )
+            WidgetUtils.buildLine(lineHeight: 3, lineColor: ColorUtils.ffeeeeee),
           ],
         ),
       ),

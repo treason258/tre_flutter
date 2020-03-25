@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tre_flutter/utils/assets_utils.dart';
 import 'package:tre_flutter/utils/toast_utils.dart';
 
 class WidgetUtils {
@@ -36,10 +37,8 @@ class WidgetUtils {
       onDoubleTap: onDoubleTapFun,
       onLongPress: onLongPressFun,
       child: Container(
+        color: backgroundColor,
         height: backgroundHeight,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-        ),
         child: Center(
           child: Text(
             text,
@@ -73,6 +72,23 @@ class WidgetUtils {
       onLongPressFun: () {
         ToastUtils.show("demo-长按-自定义方法");
       },
+    );
+  }
+
+  /// 返回横线
+  static Widget buildLine({Color lineColor: Colors.black, double lineHeight: 5}) {
+    return Container(
+      color: lineColor,
+      height: lineHeight,
+    );
+  }
+
+  /// 返回竖线
+  static Widget buildLineVertical({Color lineColor: Colors.black, double lineWidget: 5, double lineHeight: 10}) {
+    return Container(
+      color: lineColor,
+      width: lineWidget,
+      height: lineHeight,
     );
   }
 }
