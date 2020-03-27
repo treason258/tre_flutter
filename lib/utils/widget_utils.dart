@@ -91,4 +91,23 @@ class WidgetUtils {
       height: lineHeight,
     );
   }
+
+  /// 构建状态栏高度占位,height=27
+  static Widget buildStatusBar() {
+    return Container(
+      width: double.infinity,
+      color: Colors.blue,
+      height: 27,
+    );
+  }
+
+  /// 构建标题栏,height=56
+  static Widget buildTitleBar() {
+    return Container(
+      width: double.infinity,
+      color: Colors.blue,
+      height: 56,
+      child: Center(child: Text("我的", style: TextStyle(color: Colors.white, fontSize: 21))),
+    );
+  }
 }

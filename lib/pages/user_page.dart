@@ -38,13 +38,8 @@ class _UserPageState extends State<UserPage> {
     return Column(
       children: <Widget>[
         // 标题栏，28+56=84
-        Container(
-          width: double.infinity,
-          height: 84,
-          padding: EdgeInsets.only(top: 28),
-          color: Colors.blue,
-          child: Center(child: Text("我的222", style: TextStyle(color: Colors.white, fontSize: 21))),
-        ),
+        WidgetUtils.buildStatusBar(),
+        WidgetUtils.buildTitleBar(),
         Expanded(
           flex: 1,
           child: SingleChildScrollView(
