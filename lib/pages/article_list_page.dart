@@ -58,6 +58,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
     itemModelCount = mModelList.length;
     log("_ArticleListPageState | build | itemModelCount = " + itemModelCount.toString());
     return Scaffold(
+      backgroundColor: Colors.white,
       body: RefreshIndicator(
         onRefresh: _refreshData,
         backgroundColor: Colors.blue,
