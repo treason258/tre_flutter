@@ -9,11 +9,11 @@ import 'package:tre_flutter/utils/toast_utils.dart';
 import 'model/xin_list_model.dart';
 
 class XinDetailPage extends StatefulWidget {
-  XinListModel xinModel;
+  XinListModel xinListModel;
   String carserie;
 
   XinDetailPage({
-    this.xinModel,
+    this.xinListModel,
     this.carserie,
   });
 
@@ -26,7 +26,7 @@ class _XinDetailPageState extends State<XinDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.xinModel.carserie + " " + widget.xinModel.carname),
+        title: Text(widget.xinListModel.carserie + " " + widget.xinListModel.carname),
       ),
       body: Column(
         children: <Widget>[
@@ -52,8 +52,8 @@ class _XinDetailPageState extends State<XinDetailPage> {
                           ),
                         ),
                         // Image.asset(AssetsUtils.getImage('ic_wallpaper_8.jpg'), fit: BoxFit.cover),
-                        Text("价格：" + widget.xinModel.price),
-                        Text(widget.xinModel.carserie + " " + widget.xinModel.carname),
+                        Text("价格：" + widget.xinListModel.price),
+                        Text(widget.xinListModel.carserie + " " + widget.xinListModel.carname),
                         SizedBox(height: 10),
                         SizedBox(height: 10),
                         Center(),

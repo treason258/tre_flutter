@@ -82,14 +82,14 @@ class _XinListPageState extends State<XinListPage> {
             } else {
               // 1~10-model
               int indexReal = index - itemHeaderCount;
-              XinListModel item = mModelList[indexReal];
-              log("_ArticleListPageState | build | item = " + item.toString());
+              XinListModel xinListModel = mModelList[indexReal];
+              log("_ArticleListPageState | build | item = " + xinListModel.toString());
               return XinItemWidget(
-                item,
+                xinListModel,
                 index: index,
                 indexReal: indexReal,
                 onTap: () async {
-                  await NavigatorUtils.jumpByWidget(context, XinDetailPage(xinModel: item, carserie: item.carserie));
+                  await NavigatorUtils.jumpByWidget(context, XinDetailPage(xinListModel: xinListModel, carserie: xinListModel.carserie));
                 },
               );
             }
