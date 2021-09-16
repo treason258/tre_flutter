@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                     GlobalWidgetsLocalizations.delegate
                   ],
                   supportedLocales: S.delegate.supportedLocales,
-                  onGenerateRoute: Router.generateRoute,
+                  onGenerateRoute: TreRouter.generateRoute,
                   initialRoute: RouteName.splash,
                 ),
               );

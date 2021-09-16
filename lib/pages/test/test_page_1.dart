@@ -33,7 +33,7 @@ class _TestPageState extends State<TestPage1> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),

@@ -23,7 +23,7 @@ class _TestPageState extends State<TestPage2> {
         color: Colors.white,
         child: Text(
           '当前时间：$timestamp',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
       ),
       floatingActionButton: FloatingActionButton(

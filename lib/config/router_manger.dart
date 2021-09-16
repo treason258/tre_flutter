@@ -15,7 +15,7 @@ class RouteName {
   static const String article_detail = 'article_detail';
 }
 
-class Router {
+class TreRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteName.test:
