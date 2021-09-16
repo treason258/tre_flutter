@@ -17,7 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageManager.init();
 
-  // Android状态栏透明 splash为白色,所以调整状态栏文字为黑色
+  // Android状态栏透明 splash为白色,所以调整状态栏文字为黑色TEST
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarBrightness: Brightness.light));
 
   runApp(MyApp());
